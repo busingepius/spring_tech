@@ -22,7 +22,9 @@ public class User {
     private String email;
     private String password;
 
-    public User(long id, String username, String email, String password) {
+    public User(
+            long id, String username,
+            String email, String password) {
         this.id = id;
         this.username = username;
         this.email = email;
@@ -40,11 +42,10 @@ public class User {
                     CascadeType.REMOVE,
                     CascadeType.DETACH
             },
-            fetch = FetchType.EAGER,
+            fetch = FetchType.LAZY,
             mappedBy = "author"
     )
-    @JoinColumn(name = "user_id")
     @Fetch(FetchMode.SUBSELECT)
     @BatchSize(size = 5)
-    List<Comment> comments;
+    List<Post> posts;
 }
